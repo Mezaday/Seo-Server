@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="{{ url_for('static', path='styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <title>Результат</title>
+</head>
+<body style="background-color:#212529">
+    <div class="text-bg-dark p-3">
+        <div class="forms">
+            <h1>Результат:</h1>
+            <p>
+                {% for value in select %}
+                <h4>Артикул: {{ value|e }}</h4>
+                {% endfor %}
+            <p>
+                <h4>SEO:</h4><br>
+                    {% for value in seo %}
+                    {{ value|e }}<br><br>
+                    {% endfor %}
+            <p>
+                <h5>Результаты сравнения:</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                           <th scope="col">Запрос</th>
+                           <th scope="col">+</th>
+                           <th scope="col">±</th>
+                           <th scope="col">-</th>
+                           <th scope="col">Частота</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {% for numbers in dict %}
+                            <tr>
+                                {% for key, value in numbers.items() %}
+                                <td>{{ value|e }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+            <p>
+                <h5>Не прошедшие проверку:</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                           <th scope="col">Запрос</th>
+                           <th scope="col">+</th>
+                           <th scope="col">±</th>
+                           <th scope="col">-</th>
+                           <th scope="col">Частота</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {% for numbers in check %}
+                            <tr>
+                                {% for key, value in numbers.items() %}
+                                <td>{{ value|e }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+        </div>
+    </div>
+</body>
+</html>
